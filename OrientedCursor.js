@@ -78,7 +78,7 @@ class OrientedCursor{
   // LIVE COORDINATES
   push();
     noFill();
-    stroke('#fff')
+    stroke('#000')
     text('pressure: ' + this.pressure, 10, 30);
     text('tilt_X: ' + this.tiltX, 10, 50);
     text('tilt_Y: ' + this.tiltY, 10, 70);
