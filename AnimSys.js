@@ -60,7 +60,7 @@ class AnimSys {
   update_frame_list(){
     this.timeline.html('');
     for (let [i,frame] of this.framesList.entries()){
-      let frameDiv = createDiv('frame ' + i);
+      let frameDiv = createDiv('frame ' + i+1);
       frameDiv.id('frame-number-' + i);
       frameDiv.class('aframe');
       frameDiv.parent(this.timeline);
