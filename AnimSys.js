@@ -16,9 +16,9 @@ class AnimSys {
     this.createFrame_btn.mousePressed(this.create_new_frame.bind(this));
     this.createFrame_btn.parent(this.UI);
     
-    this.updateFrame_btn = createButton("Update Frame");
-    this.updateFrame_btn.mousePressed(this.update_frame.bind(this));
-    this.updateFrame_btn.parent(this.UI);
+    //this.updateFrame_btn = createButton("Update Frame");
+    //this.updateFrame_btn.mousePressed(this.update_frame.bind(this));
+    //this.updateFrame_btn.parent(this.UI);
     
     this.play_btn = createButton("Play Anim");
     this.play_btn.mousePressed(this.play_anim.bind(this));
@@ -203,7 +203,7 @@ class AnimSys {
   clear_frame(){ 
     
     this.frameGraphics.clear();
-    
+    this.update_frame();
     redraw();
   }
   
