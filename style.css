@@ -40,5 +40,10 @@ canvas {
 }
 
 #ui-container > button {
-    cursor: pointer;
+  cursor: pointer;
+  border: none;
+  margin: 0 4px;
+  border-radius: 4px;
+  height: 30px;
+  padding: 0px 20px
 }
