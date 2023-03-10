@@ -23,7 +23,7 @@ function setup() {
   pixelDensity(1);
   background('white');
   
-  AS = new AnimSys(24, 12, 30);
+  AS = new AnimSys(24, 6, 30);
   Draws = new DrawHandler();
   
   Cursor = new OrientedCursor('canvas');
