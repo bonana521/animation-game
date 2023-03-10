@@ -15,6 +15,7 @@ body {
 }
 canvas {
   display: block;
+  border-radius: 4px;
 }
 
 .aframe{
