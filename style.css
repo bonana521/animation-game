@@ -10,6 +10,8 @@ body {
   align-items: center;
   flex-direction: column;
   flex-wrap: nowrap;
+  color: white;
+  font-family: monospace;
 }
 canvas {
   display: block;
