@@ -49,3 +49,7 @@ canvas {
   height: 30px;
   padding: 0px 20px
 }
+
+#ui-container > button:hover {
+  background-color: lightgrey;
+}
