@@ -28,6 +28,8 @@ canvas {
   border-radius: 20px;
   cursor: pointer;
   color: black;
+  margin: 0 1px;
+  padding: 0px 10px;
 }
 
 .current-frame{
