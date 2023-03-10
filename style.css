@@ -38,3 +38,7 @@ canvas {
   display: flex;
   margin-top: 10px;
 }
+
+#ui-container > button {
+    cursor: pointer;
+}
