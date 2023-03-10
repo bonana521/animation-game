@@ -1,6 +1,6 @@
 ---
-title: Simple Animation System
-emoji: 📚
+title: Simple Animation Doodle
+emoji: ✏️
 colorFrom: yellow
 colorTo: pink
 sdk: static
