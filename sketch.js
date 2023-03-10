@@ -17,7 +17,7 @@ let brushesPoints = [];
 
 function setup() {
     
-  canvas = createCanvas(800, 800);
+  canvas = createCanvas(512, 512);
   canvas.id('canvas');
   noLoop();
   pixelDensity(1);
