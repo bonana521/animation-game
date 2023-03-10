@@ -20,7 +20,7 @@ function setup() {
   canvas = createCanvas(512, 512);
   canvas.id('canvas');
   noLoop();
-  pixelDensity(1);
+  pixelDensity(2);
   background('white');
   
   AS = new AnimSys(24, 6, 30);
