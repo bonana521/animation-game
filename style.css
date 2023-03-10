@@ -1,28 +1,28 @@
-body {
-	padding: 2rem;
-	font-family: -apple-system, BlinkMacSystemFont, "Arial", sans-serif;
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #0b0f19;
+}
+canvas {
+  display: block;
 }
 
-h1 {
-	font-size: 16px;
-	margin-top: 0;
+.aframe{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 20px;
+  background: white;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
-p {
-	color: rgb(107, 114, 128);
-	font-size: 15px;
-	margin-bottom: 10px;
-	margin-top: 5px;
+.current-frame{
+  background: orange;
 }
 
-.card {
-	max-width: 620px;
-	margin: 0 auto;
-	padding: 16px;
-	border: 1px solid lightgray;
-	border-radius: 16px;
-}
-
-.card p:last-child {
-	margin-bottom: 0;
+#timeline, #ui-container{
+  display: flex;
+  margin-top: 10px;
 }
