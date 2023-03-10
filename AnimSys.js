@@ -136,7 +136,7 @@ class AnimSys {
       
       this.frameGraphics.clear();
       
-      this.frameGraphics.image(display, 0, 0);
+      this.frameGraphics.image(display, 0, 0, 512, 512);
       
     }.bind(this));
     
@@ -163,7 +163,7 @@ class AnimSys {
 
         this.onionGraphics.clear();
         this.onionGraphics.tint(255, this.onions_tint);
-        this.onionGraphics.image(displayOnions, 0, 0);
+        this.onionGraphics.image(displayOnions, 0, 0, 512, 512);
         
       }.bind(this));
     }
