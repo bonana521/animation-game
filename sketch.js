@@ -95,7 +95,7 @@ function draw() {
     
   }
   
-  image(AS.frameGraphics, 0, 0, canvas.width, canvas.height)
+  image(AS.frameGraphics, 0, 0, 512, 512)
   image(Draws.drawGraphic, 0, 0)
   
   if(Draws.isDrawing){
