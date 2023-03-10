@@ -22,6 +22,7 @@ h1 {
 canvas {
   display: block;
   border-radius: 4px;
+  cursor: crosshair;
 }
 
 .aframe{
@@ -48,11 +49,11 @@ canvas {
 }
 
 #ui-container > button {
-  cursor: pointer;
   border: none;
-  margin: 0 4px;
   border-radius: 4px;
+  cursor: pointer;
   height: 30px;
+  margin: 0 4px;
   padding: 0px 20px
 }
 
