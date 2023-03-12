@@ -1,64 +1,121 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #0b0f19;
-}
-body {
-  display: flex;
-  /* align-content: center; */
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  flex-wrap: nowrap;
   color: white;
   font-family: monospace;
 }
+h1{
+  color: white;
+  font-family: monospace;
+  text-align: center;
+}
+div#main-container{
+  display: flex;
+  justify-content: center;
+}
+div#left-panel, div#right-panel{
+  /*border: 1px solid white;*/
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  margin: 20px;
+  width: 100px;
+}
+i{
+  font-size: 30px;
+}
+span.spec-onions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-h1 {
-    margin-bottom: 0;
-    margin-top: 30px;
+span.spec-onions > i.fa-solid.fa-circle {
+  margin-left: -14px; 
+}
+button#hide-onion-btn {
+  border-color: #ef70ff !important;
+  color: #ef70ff !important;
+}
+button.tool-active {
+  border-color: #70c9ff !important;
+  color: #70c9ff !important;
+}
+
+div#right-panel > button, div#left-panel > button{
+  background: none;
+  border: 4px solid rgb(181,181,181);
+  border-radius: 10px;
+  color: rgb(181,181,181);
+  cursor: pointer;
+  height: 70px;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 70px;
+}
+
+div#right-panel > button:hover, div#left-panel > button:hover{
+  color:white;
+  border-color:white;
+}
+
+button#play-btn{
+  border: 4px solid #6bff6f !important;
+  color: #6bff6f !important;
+}
+button#stop-btn {
+  border: 4px solid #ff303b !important;
+  color: #ff303b !important;
+}
+div#timeline-ctn{
+  align-items: center;
+  /*border: 1px dashed white;*/
+  border-radius: 10px;
+  display: flex;
+  height: 60px;
+  justify-content: center;
+  margin: 4px 0;
+}
+div#canvas-ctn{
+  /*background: white;*/
+  /*border: 1px solid white;*/
+  /*border-radius : 10px;*/
+  /*padding: 20px;*/
+  /*width: 512px;*/
 }
 
 canvas {
-  display: block;
-  border-radius: 4px;
   cursor: crosshair;
+  display: block;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
 }
 
 .aframe{
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 60px;
-  height: 20px;
-  background: white;
-  border-radius: 20px;
-  border: 2px solid #ffffff;
-  cursor: pointer;
   color: black;
-  margin: 0 1px;
-  padding: 0px 10px;
+  font-family: monospace;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: white;
+  border: 2px solid #ffffff;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 0 2px;
 }
 
 .current-frame{
   background: #ffcf1e;
   border: 2px solid #ff9d0c;
+  color: #422700;
+  font-weight: bold;
 }
 
 #timeline, #ui-container{
   display: flex;
-  margin-top: 10px;
-}
-
-#ui-container > button {
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  height: 30px;
-  margin: 0 4px;
-  padding: 0px 20px
-}
-
-#ui-container > button:hover {
-  background-color: lightgrey;
 }
