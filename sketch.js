@@ -19,12 +19,18 @@ function setup() {
     
   canvas = createCanvas(512, 512);
   canvas.id('canvas');
+  canvas.parent('canvas-ctn');
   noLoop();
-  pixelDensity(2);
+  pixelDensity(1);
   background('white');
   
-  AS = new AnimSys(24, 6, 30);
   Draws = new DrawHandler();
+  AS = new AnimSys(12, 12, 30, 8);
+  
+  for (let i = 0; i < AS.initial_frame_nb; i++) {
+    AS.create_new_frame();
+    AS.display_frame(0);
+  }
   
   Cursor = new OrientedCursor('canvas');
   Cursor.catchCursor();
@@ -36,7 +42,8 @@ function setup() {
     Draws.startPath();
   });
   canvas.mouseReleased(function(){
-    Draws.endPath(AS.frameGraphics);
+    Draws.endPath(Draws.drawGraphic, AS.frameGraphics);
+    Draws.drawings = [];
     AS.update_frame();
   });
     
@@ -60,10 +67,10 @@ function mouseDragged(){
 
 function draw() {
   
-  Draws.keydown_check();
+  //Draws.keydown_check();
   
-  clear();
-  background('white');
+  clear(); // clear the whole canvas
+  background('white'); // set main canvas background to 'white'
     
   if(Cursor.isOnCanvas == false){
     Cursor.tiltX = 0;
@@ -81,11 +88,16 @@ function draw() {
         
   
   for (let i = 0; i < brushesPoints.length; i++) {
-      brushesPoints[i].calcPointCoordinates(mouseX, mouseY, Cursor.targetAngle, Cursor.diameter);
+      brushesPoints[i]
+        .calcPointCoordinates(mouseX, 
+                              mouseY, 
+                              Cursor.targetAngle, 
+                              Cursor.diameter
+                             );
   }
    
-  
-  Draws.drawLines(0, 'black'); // pencil
+  // DRAWS CURRENT PATH 
+  Draws.drawLines(0, 'black', 4, Draws.drawGraphic); // pencil
   
   //------------
   
@@ -95,16 +107,17 @@ function draw() {
     
   }
   
-  image(AS.frameGraphics, 0, 0, 512, 512)
+  image(AS.frameGraphics, 0, 0)
   image(Draws.drawGraphic, 0, 0)
   
   if(Draws.isDrawing){
   
-    Cursor.showCursor(mouseX, mouseY);
+    //Cursor.showCursor(mouseX, mouseY);
     
   }
   
-  Cursor.showData();
+  // DISPLAY TECHNICAL DATA ABOUT THE CURSOR
+  //Cursor.showData();
   
 
 } // END DRAW
