@@ -1,22 +1,66 @@
 class DrawHandler {
   
   constructor(){
+    
+    // create a layer that will handle drawing phase
     this.drawGraphic = createGraphics(width, height);
-
+    
+    // create an array to store all paths
     this.drawings = [];
-
+    
+    // create an array to store path's points being produced
     this.currentPath = [];
     
+    // bool to check if user is drawing, pencil touching and dragged on the canvas
     this.isDrawing = false;
     
+    // bool to check if user is using eraser instead
     this.isErasing = false;
     
+    // set the eraser radius
     this.eraserRadius = 10;
+    
+    this.pencil_btn = createButton('<i class="fa-solid fa-pencil"></i>');
+    this.pencil_btn.mousePressed(this.pickPencil.bind(this));
+    this.pencil_btn.parent('left-panel');
+    this.pencil_active = true;
+    this.pencil_btn.addClass('tool-active');
+    
+    this.eraser_btn = createButton('<i class="fa-solid fa-eraser"></i>');
+    this.eraser_btn.mousePressed(this.pickEraser.bind(this));
+    this.eraser_btn.parent('left-panel');
+    this.eraser_active = false;
   }
   
   // -----------------------------------------
   // -----------------------------------------
   
+  pickPencil(){
+    this.isErasing = false;
+    if(this.pencil_active == false){
+      this.pencil_active = true;
+      this.pencil_btn.addClass('tool-active');
+      this.eraser_active = false;
+      this.eraser_btn.removeClass('tool-active');
+    } 
+  }
+  
+  pickEraser(){
+    this.isErasing = true;
+    if(this.eraser_active == false){
+      this.eraser_active = true;
+      this.eraser_btn.addClass('tool-active');
+      this.pencil_active = false;
+      this.pencil_btn.removeClass('tool-active');
+      
+    } 
+    
+  }
+  
+  // -----------------------------------------
+  // -----------------------------------------
+  
+  // this function calls the trueErase() method applied on the targeted layer
   mouseDragged(target_graphics){
   
     if(Draws.isDrawing && Draws.isErasing){
@@ -31,14 +75,21 @@ class DrawHandler {
   // -----------------------------------------
   // -----------------------------------------
   
+  // this function checks if a key is down, 
+  // if so do corresponding task
   keydown_check(){
     
+    // checks if the "E" key is down, 
+    // if so set isErasing bool to true while "E" key is down
     if (keyIsDown(69)){ // KEY E
+      this.pickEraser();
       this.isErasing = true;
+      
     } else {
+      this.pickPencil();
       this.isErasing = false;
+      
     } 
-    
   }
   
   // -----------------------------------------
@@ -49,12 +100,19 @@ class DrawHandler {
     Cursor.calculateAngle();
 
     for (let i = 0; i < brushesPoints.length; i++) {
-        brushesPoints[i].calcPointCoordinates(mouseX, mouseY, Cursor.targeAngle, Cursor.diameter);
+      
+        brushesPoints[i]
+          .calcPointCoordinates(mouseX, 
+                                mouseY,
+                                Cursor.targeAngle,
+                                Cursor.diameter
+                               );
+    
     }
 
 
     for (let i = 0; i < brushesPoints.length; i++) {
-        brushesPoints[i].resetPointOrigin()
+        brushesPoints[i].resetPointOrigin();
     }
 
     this.isDrawing = true;
@@ -63,28 +121,28 @@ class DrawHandler {
     //console.log("——");
     //console.log("You started a new path!");
     this.drawings.push(this.currentPath);
-    //console.log("A new array of points is pushed in 'drawing'");
+    //console.log("A new array of points is pushed in 'drawings'");
 
   }
   
   // -----------------------------------------
   // -----------------------------------------
   
-  endPath(target_graphics) {
+  endPath(source_graphics, target_graphics) {
     this.isDrawing = false;
 
-    // on affiche le nouveau drawings sur la target (ici: frameGraphics)
-    target_graphics.image(this.drawGraphic, 0, 0);
+    // on affiche le nouveau drawings sur la target 
+    target_graphics.image(source_graphics, 0, 0);
     // on vide le drawings array
-    this.drawings = [];
+    //this.drawings = [];
     // on clear le drawGraphic
-    this.drawGraphic.clear();  
+    source_graphics.clear();  
     //on redraw
     redraw();
   }
   
   trueErase(r, target){
-    // target is the graphics you want to erase on | e.g: ani.frameGraphics
+    // target is the graphics you want to erase on | e.g: className.frameGraphics
     target.loadPixels();
 
     for (let x = mouseX - r; x < mouseX + r; x++) {
@@ -133,7 +191,7 @@ class DrawHandler {
   // -----------------------------------------
   // -----------------------------------------
   
-  drawLines(index, color){
+  drawLines(index, color, size, graphics){
     //Shows the current drawing if there any data in drawing array
 
     if(this.isDrawing == true && this.isErasing == false){
@@ -150,17 +208,17 @@ class DrawHandler {
 
             push();
 
-              this.drawGraphic.beginShape();
-              this.drawGraphic.strokeWeight(4);
-              this.drawGraphic.noFill();
-              this.drawGraphic.stroke(color); // A     
+              graphics.beginShape();
+              graphics.strokeWeight(size);
+              graphics.noFill();
+              graphics.stroke(color); // A     
 
-              this.drawGraphic.curveVertex(path[j].x1[index], path[j].y1[index]);
-              this.drawGraphic.curveVertex(path[j].x2[index], path[j].y2[index]);
-              this.drawGraphic.curveVertex(path[j].x3[index], path[j].y3[index]);
-              this.drawGraphic.curveVertex(path[j].x4[index], path[j].y4[index]);
+              graphics.curveVertex(path[j].x1[index], path[j].y1[index]);
+              graphics.curveVertex(path[j].x2[index], path[j].y2[index]);
+              graphics.curveVertex(path[j].x3[index], path[j].y3[index]);
+              graphics.curveVertex(path[j].x4[index], path[j].y4[index]);
 
-              this.drawGraphic.endShape();
+              graphics.endShape();
 
             pop();
 
