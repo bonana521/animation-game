@@ -1,9 +1,10 @@
 class AnimSys {
    
-  constructor(fps, frame_limit, onions_tint){
+  constructor(fps, frame_limit, onions_tint, initial_frame_nb){
     this.fps = fps;
     this.frame_limit = frame_limit;
     this.onions_tint = onions_tint;
+    this.initial_frame_nb = initial_frame_nb; 
     this.framesList = [];
     
     this.frameGraphics = createGraphics(width, height);
@@ -12,37 +13,42 @@ class AnimSys {
     this.UI = createDiv('');
     this.UI.id('ui-container');
     
-    this.createFrame_btn = createButton("Create New Frame");
+    this.createFrame_btn = createButton('<i class="fa-regular fa-square-plus"></i>');
     this.createFrame_btn.mousePressed(this.create_new_frame.bind(this));
-    this.createFrame_btn.parent(this.UI);
+    //this.createFrame_btn.parent(this.UI);
+    this.createFrame_btn.parent('right-panel');
     
-    //this.updateFrame_btn = createButton("Update Frame");
-    //this.updateFrame_btn.mousePressed(this.update_frame.bind(this));
-    //this.updateFrame_btn.parent(this.UI);
-    
-    this.play_btn = createButton("Play Anim");
-    this.play_btn.mousePressed(this.play_anim.bind(this));
-    this.play_btn.parent(this.UI);
-    
-    this.stop_btn = createButton("Stop Anim").hide();
-    this.stop_btn.mousePressed(this.play_anim.bind(this));
-    this.stop_btn.parent(this.UI);
-    
-    this.show_onion_btn = createButton("Show Onions");
+    this.show_onion_btn = createButton('<span class="spec-onions"><i class="fa-regular fa-circle"></i><i class="fa-solid fa-circle"></i><span>');
     this.show_onion_btn.mousePressed(this.switch_onions.bind(this));
-    this.show_onion_btn.parent(this.UI);
+    //this.show_onion_btn.parent(this.UI);
+    this.show_onion_btn.parent('right-panel');
     
-    this.hide_onion_btn = createButton("Hide Onions").hide();
+    this.hide_onion_btn = createButton('<span class="spec-onions"><i class="fa-regular fa-circle"></i><i class="fa-solid fa-circle"></i><span>').hide();
+    this.hide_onion_btn.id('hide-onion-btn');
     this.hide_onion_btn.mousePressed(this.switch_onions.bind(this));
-    this.hide_onion_btn.parent(this.UI);
+    //this.hide_onion_btn.parent(this.UI);
+    this.hide_onion_btn.parent('right-panel');
     
-    this.clear_frame_btn = createButton("Clear Frame");
+    this.clear_frame_btn = createButton('<i class="fa-solid fa-hand-sparkles"></i>');
     this.clear_frame_btn.mousePressed(this.clear_frame.bind(this));
-    this.clear_frame_btn.parent(this.UI);
-        
+    //this.clear_frame_btn.parent(this.UI);
+    this.clear_frame_btn.parent('left-panel');   
+    
+    this.play_btn = createButton('<i class="fa-solid fa-play"></i>');
+    this.play_btn.id('play-btn');
+    this.play_btn.mousePressed(this.play_anim.bind(this));
+    //this.play_btn.parent(this.UI);
+    this.play_btn.parent('right-panel');
+    
+    this.stop_btn = createButton('<i class="fa-solid fa-pause"></i>').hide();
+    this.stop_btn.id('stop-btn');
+    this.stop_btn.mousePressed(this.play_anim.bind(this));
+    //this.stop_btn.parent(this.UI);
+    this.stop_btn.parent('right-panel');
     
     this.timeline = createDiv('timeline');
     this.timeline.id('timeline');
+    this.timeline.parent('timeline-ctn');
     
     this.frame_displayed = 0;
     
@@ -58,9 +64,11 @@ class AnimSys {
   
   
   update_frame_list(){
+    //flush timeline elements
     this.timeline.html('');
+    //insert frames + new one in timeline
     for (let [i,frame] of this.framesList.entries()){
-      let frameDiv = createDiv('frame ' + parseInt(i+1));
+      let frameDiv = createDiv(i+1);
       frameDiv.id('frame-number-' + i);
       frameDiv.class('aframe');
       frameDiv.parent(this.timeline);
@@ -131,14 +139,17 @@ class AnimSys {
     let getDiv = select('#frame-number-' + this.frame_displayed);
     getDiv.addClass('current-frame');
 
+    if(this.framesList[frame_index].img_data !== undefined){
+      
+      let display = loadImage(this.framesList[frame_index].img_data, function(){
+      
+        this.frameGraphics.clear();
+        this.frameGraphics.image(display, 0, 0);
+
+      }.bind(this));
     
-    let display = loadImage(this.framesList[frame_index].img_data, function(){
-      
-      this.frameGraphics.clear();
-      
-      this.frameGraphics.image(display, 0, 0, 512, 512);
-      
-    }.bind(this));
+    }
+    
     
     //redraw();
     // ONIONS À TRAITER DANS UNE FUNCTION À PART POUR + D'EFFICACITÉ
@@ -149,21 +160,21 @@ class AnimSys {
       
       let onion_index;
     
-    if (frame_index == 0){
-      
-      onion_index = this.framesList.length - 1;
-      
-    } else {
-      
-      onion_index = frame_index - 1;
-      
-    }
+      if (frame_index == 0){
+
+        onion_index = this.framesList.length - 1;
+
+      } else {
+
+        onion_index = frame_index - 1;
+
+      }
       
       let displayOnions = loadImage(this.framesList[onion_index].img_data, function(){
 
         this.onionGraphics.clear();
         this.onionGraphics.tint(255, this.onions_tint);
-        this.onionGraphics.image(displayOnions, 0, 0, 512, 512);
+        this.onionGraphics.image(displayOnions, 0, 0);
         
       }.bind(this));
     }
@@ -201,7 +212,7 @@ class AnimSys {
   // -----------------------------------------
   
   clear_frame(){ 
-    
+    // add here all the graphics layer you need to clear
     this.frameGraphics.clear();
     this.update_frame();
     redraw();
@@ -224,10 +235,12 @@ class AnimSys {
       this.show_onion_btn.show();
     
     }
+    if(this.framesList.length != 0){
+      setTimeout(function(){
+        this.display_frame(this.frame_displayed)
+      }.bind(this), 10);
+    }
     
-    setTimeout(function(){
-      this.display_frame(this.frame_displayed)
-    }.bind(this), 10);
     
   }
   
@@ -237,6 +250,9 @@ class AnimSys {
   play_anim(){
     if(this.framesList.length > 0){
       if (this.isPlaying == false){
+        if(this.showOnions == true){
+          this.switch_onions();
+        }
         this.isPlaying = true;
         this.play_interval = setInterval(function(){
             this.display_frame(this.frame_displayed)
