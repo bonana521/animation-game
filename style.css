@@ -33,6 +33,7 @@ canvas {
   height: 20px;
   background: white;
   border-radius: 20px;
+  border: 2px solid #ffffff;
   cursor: pointer;
   color: black;
   margin: 0 1px;
@@ -40,7 +41,8 @@ canvas {
 }
 
 .current-frame{
-  background: orange;
+  background: #ffcf1e;
+  border: 2px solid #ff9d0c;
 }
 
 #timeline, #ui-container{
