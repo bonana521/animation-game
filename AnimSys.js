@@ -13,7 +13,7 @@ class AnimSys {
     this.UI = createDiv('');
     this.UI.id('ui-container');
     
-    this.createFrame_btn = createButton('<i class="fa-regular fa-square-plus"></i>');
+    this.createFrame_btn = createButton('<i class="fa-solid fa-circle-plus"></i>');
     this.createFrame_btn.mousePressed(this.create_new_frame.bind(this));
     //this.createFrame_btn.parent(this.UI);
     this.createFrame_btn.parent('right-panel');
