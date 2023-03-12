@@ -3,17 +3,27 @@
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8" />
 
   </head>
   <body>
-    <h1>Simple Animation Doodle</h1>
-    <p>Hold "E" to erase ;)</p>
+    <div id="main-container">
+      <div id="left-panel"></div>
+      <div id="center-panel">
+        <h1>Simple Animation Doodle</h1>
+        <div id="canvas-ctn"></div>
+        <div id="timeline-ctn"></div>
+        <div id="ml-config-ctn"></div>
+      </div>   
+      <div id="right-panel"></div>
+    </div>
     <script src="sketch.js"></script>
     <script src="OrientedCursor.js"></script>
-    <script src="brushpoint.js"></script>    
-    <script src="AnimSys.js"></script>
+    <script src="brushpoint.js"></script>  
     <script src="DrawHandler.js"></script>
+    <script src="AnimSys.js"></script>
+    
   </body>
 </html>
