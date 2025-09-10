@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Animation Doodle - 本地版本</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        #container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #canvas-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        #controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        #info {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Simple Animation Doodle</h1>
+        <div id="canvas-container"></div>
+        <div id="controls">
+            <button id="clearBtn">清除画布</button>
+            <button id="saveBtn">保存图像</button>
+        </div>
+        <div id="info">
+            使用鼠标在画布上绘画
+        </div>
+    </div>
+
+    <script>
+        let canvas;
+        let isDrawing = false;
+        let paths = [];
+        let currentPath = [];
+
+        function setup() {
+            canvas = createCanvas(512, 512);
+            canvas.parent('canvas-container');
+            background('white');
+            
+            // 绘制控制
+            canvas.mousePressed(startDrawing);
+            canvas.mouseReleased(stopDrawing);
+            canvas.mouseDragged(draw);
+            
+            // 按钮控制
+            document.getElementById('clearBtn').addEventListener('click', clearCanvas);
+            document.getElementById('saveBtn').addEventListener('click', saveImage);
+        }
+
+        function draw() {
+            if (isDrawing) {
+                stroke(0);
+                strokeWeight(4);
+                line(mouseX, mouseY, pmouseX, pmouseY);
+                currentPath.push({x: mouseX, y: mouseY});
+            }
+        }
+
+        function startDrawing() {
+            isDrawing = true;
+            currentPath = [];
+        }
+
+        function stopDrawing() {
+            if (isDrawing && currentPath.length > 0) {
+                paths.push([...currentPath]);
+            }
+            isDrawing = false;
+        }
+
+        function clearCanvas() {
+            background('white');
+            paths = [];
+        }
+
+        function saveImage() {
+            saveCanvas(canvas, 'my-drawing', 'png');
+        }
+    </script>
+</body>
+</html>
