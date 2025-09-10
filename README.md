@@ -2,6 +2,10 @@
 
 一个现代化的网页动画创作工具，让你轻松创建有趣的动画作品！
 
+[![在线体验](https://img.shields.io/badge/Online-Play%20Now-brightgreen?style=for-the-badge&logo=chrome&logoColor=white)](https://bonana521.github.io/animation-game/)
+[![GitHub Stars](https://img.shields.io/github/stars/bonana521/animation-game?style=for-the-badge&logo=github&logoColor=white)](https://github.com/bonana521/animation-game)
+[![License](https://img.shields.io/badge/license-MIT-purple?style=for-the-badge)](https://github.com/bonana521/animation-game/blob/main/LICENSE)
+
 ![Animation Doodle Studio](https://img.shields.io/badge/Animation-Doodle%20Studio-blue?style=for-the-badge&logo=palette&logoColor=white)
 ![Version](https://img.shields.io/badge/version-1.0.0-green?style=for-the-badge)
 ![License](https://img.shields.io/badge/license-MIT-purple?style=for-the-badge)
@@ -33,10 +37,18 @@
 
 ## 🚀 快速开始
 
-### 在线体验
-直接在浏览器中打开 `index-pure.html` 即可开始创作！
+### 🌐 在线体验
+**直接访问链接即可开始创作！**
 
-### 本地使用
+👉 **在线地址**: [https://bonana521.github.io/animation-game/](https://bonana521.github.io/animation-game/)
+
+✨ **特色**:
+- 无需下载，打开即用
+- 支持所有现代浏览器
+- 移动设备完美适配
+- 自动保存进度
+
+### 💻 本地使用
 ```bash
 # 克隆项目
 git clone https://github.com/bonana521/animation-game.git
